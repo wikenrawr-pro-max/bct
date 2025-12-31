@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BCT Engineering Notes</title>
+    <title>Notebooks Nepal - Your Complete Study Resource</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,10 +11,10 @@
     <header>
         <nav>
             <div class="logo">
-                📚 BCT Notes
+                📚 Notebooks Nepal
             </div>
             <div class="search-container">
-                <input type="text" class="search-bar" id="searchBar" placeholder="Search subjects, semesters...">
+                <input type="text" class="search-bar" id="searchBar" placeholder="Search subjects, courses...">
                 <button class="dark-mode-toggle" id="darkModeToggle">🌙 Dark Mode</button>
             </div>
         </nav>
@@ -22,33 +22,70 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>BCT Engineering Notes</h1>
-        <p>Your complete resource for Bachelor in Computer Engineering study materials</p>
-        <button class="cta-button" onclick="document.getElementById('semesters').scrollIntoView({behavior: 'smooth'})">
-            Explore Notes
+        <h1>Notebooks Nepal</h1>
+        <p>Your Complete Study Resource for Grade 11, 12 & BCT Engineering</p>
+        <button class="cta-button" onclick="document.getElementById('programs').scrollIntoView({behavior: 'smooth'})">
+            Start Learning
         </button>
     </section>
 
     <!-- Main Container -->
     <div class="container">
-        <!-- Semester Grid Section -->
-        <section id="semesters">
-            <h2 class="section-title">Select Your Semester</h2>
-            <div class="semester-grid" id="semesterGrid"></div>
+        <!-- Program Selection Section -->
+        <section id="programs">
+            <h2 class="section-title">Choose Your Program</h2>
+            <div class="program-grid">
+                <div class="program-card" onclick="showLevels('grade11')">
+                    <div class="program-icon">🎓</div>
+                    <h3>Grade 11</h3>
+                    <p>Complete notes and resources</p>
+                </div>
+                <div class="program-card" onclick="showLevels('grade12')">
+                    <div class="program-icon">📖</div>
+                    <h3>Grade 12</h3>
+                    <p>Complete notes and resources</p>
+                </div>
+                <div class="program-card" onclick="showLevels('bct')">
+                    <div class="program-icon">🎯</div>
+                    <h3>BCT Engineering</h3>
+                    <p>4 Years, 8 Semesters</p>
+                </div>
+            </div>
         </section>
 
-        <!-- Subjects Section (Hidden by default) -->
+        <!-- Level Selection Section (Notes, Syllabus, Past Papers) -->
+        <section class="levels-section" id="levelsSection">
+            <button class="back-button" id="backToPrograms">← Back to Programs</button>
+            <h2 class="section-title" id="levelTitle"></h2>
+            <div class="levels-grid" id="levelsGrid"></div>
+        </section>
+
+        <!-- Content Grid Section (Semesters/Years) -->
+        <section class="content-section" id="contentSection">
+            <button class="back-button" id="backToLevels">← Back</button>
+            <h2 class="section-title" id="contentTitle"></h2>
+            <div class="content-grid" id="contentGrid"></div>
+        </section>
+
+        <!-- Subjects Section -->
         <section class="subjects-section" id="subjectsSection">
-            <button class="back-button" id="backToSemesters">← Back to Semesters</button>
-            <h2 class="section-title" id="semesterTitle"></h2>
+            <button class="back-button" id="backToContent">← Back</button>
+            <h2 class="section-title" id="subjectsTitle"></h2>
             <div class="subjects-grid" id="subjectsGrid"></div>
         </section>
 
-        <!-- PDF Viewer Section (Hidden by default) -->
+        <!-- Chapters Section (for chapter-wise notes) -->
+        <section class="chapters-section" id="chaptersSection">
+            <button class="back-button" id="backToSubjects">← Back to Subjects</button>
+            <h2 class="section-title" id="chaptersTitle"></h2>
+            <div class="chapters-grid" id="chaptersGrid"></div>
+        </section>
+
+        <!-- PDF Viewer Section -->
         <section class="pdf-viewer-section" id="pdfViewerSection">
             <div class="pdf-header">
                 <h3 class="pdf-title" id="pdfTitle"></h3>
-                <button class="back-button" id="backToSubjects">← Back to Subjects</button>
+                <button class="back-button" id="backFromPDF">← Back</button>
             </div>
             <iframe class="pdf-viewer" id="pdfViewer"></iframe>
         </section>
@@ -56,8 +93,8 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 BCT Engineering Notes. All rights reserved.</p>
-        <p>Empowering BCT students with quality study materials</p>
+        <p>&copy; 2024 Notebooks Nepal. All rights reserved.</p>
+        <p>Empowering Nepali students with quality study materials</p>
     </footer>
 
     <!-- Link to JavaScript file -->

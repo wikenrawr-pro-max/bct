@@ -1,139 +1,357 @@
 // ========== DATA SECTION ==========
 
-// Semester data with all subjects for BCT
-const semestersData = {
-    1: ['Engineering Mathematics I', 'Computer Programming', 'Engineering Drawing I', 'Engineering Physics', 'Applied Mechanics'],
-    2: ['Engineering Mathematics II', 'Engineering Drawing II', 'Basic Electronics Engineering', 'Fundamental of Thermodynamics & Heat Transfer', 'Workshop Technology'],
-    3: ['Engineering Mathematics III', 'Object Oriented Programming', 'Electric Circuit Theory', 'Electronic Devices and Circuits', 'Digital Logic'],
-    4: ['Applied Mathematics', 'Microprocessor', 'Discrete Structure', 'Theory of Computation', 'Numerical Methods'],
-    5: ['Probability and Statistics', 'Data Structure and Algorithms', 'Computer Organization and Architecture', 'Computer Graphics', 'Object Oriented Analysis and Design'],
-    6: ['Embedded System', 'Artificial Intelligence', 'Computer Networks', 'Database Management System', 'Software Engineering'],
-    7: ['Project Management', 'Organization and Management', 'Simulation and Modeling', 'Elective I', 'Elective II'],
-    8: ['Energy Environment and Society', 'Engineering Professional Practice', 'Project Work', 'Elective III']
+// Grade 11 Subjects (Sample - Replace with actual subjects)
+const grade11Subjects = [
+    'Physics', 'Chemistry', 'Mathematics', 'English', 
+    'Computer Science', 'Biology', 'Accountancy', 'Economics'
+];
+
+// Grade 12 Subjects (Sample - Replace with actual subjects)
+const grade12Subjects = [
+    'Physics', 'Chemistry', 'Mathematics', 'English', 
+    'Computer Science', 'Biology', 'Accountancy', 'Economics'
+];
+
+// BCT Semester Data with actual subjects
+const bctSemestersData = {
+    'Year I - Part I': [
+        { code: 'ENSH 101', name: 'Engineering Mathematics I' },
+        { code: 'ENCT 101', name: 'Computer Programming' },
+        { code: 'ENME 101', name: 'Engineering Drawing' },
+        { code: 'ENEX 101', name: 'Fundamental of Electrical and Electronics Engineering' },
+        { code: 'ENSH 102', name: 'Engineering Physics' },
+        { code: 'ENME 106', name: 'Engineering Workshop' }
+    ],
+    'Year I - Part II': [
+        { code: 'ENSH 151', name: 'Engineering Mathematics II' },
+        { code: 'ENCT 151', name: 'Object Oriented Programming' },
+        { code: 'ENEX 152', name: 'Digital Logic' },
+        { code: 'ENEX 151', name: 'Electronic Device and Circuits' },
+        { code: 'ENSH 153', name: 'Engineering Chemistry' },
+        { code: 'ENEE 154', name: 'Electrical Circuits and Machines' }
+    ],
+    'Year II - Part I': [
+        { code: 'ENSH 201', name: 'Engineering Mathematics III' },
+        { code: 'ENSH 204', name: 'Communication English' },
+        { code: 'ENCT 201', name: 'Computer Graphics and Visualization' },
+        { code: 'ENCT 202', name: 'Foundation of Data Science' },
+        { code: 'ENCT 203', name: 'Theory of Computation' },
+        { code: 'ENEX 201', name: 'Microprocessors' }
+    ],
+    'Year II - Part II': [
+        { code: 'ENSH 252', name: 'Numerical Methods' },
+        { code: 'ENEX 252', name: 'Instrumentation' },
+        { code: 'ENEX 254', name: 'Electromagnetics' },
+        { code: 'ENCT 252', name: 'Data Structure and Algorithm' },
+        { code: 'ENCT 253', name: 'Data Communication' },
+        { code: 'ENCT 254', name: 'Operating System' }
+    ],
+    'Year III - Part I': [
+        { code: 'ENSH 304', name: 'Probability and Statistics' },
+        { code: 'ENCT 301', name: 'Database Management System' },
+        { code: 'ENCT 302', name: 'Web Application Programming' },
+        { code: 'ENCT 303', name: 'Computer Organization and Architecture' },
+        { code: 'ENCT 304', name: 'Computer Networks' },
+        { code: 'ENCT 325-344', name: 'Elective I' }
+    ],
+    'Year III - Part II': [
+        { code: 'ENCE 356', name: 'Engineering Economics' },
+        { code: 'ENCT 351', name: 'Artificial Intelligence' },
+        { code: 'ENCT 352', name: 'Software Engineering' },
+        { code: 'ENCT 353', name: 'Simulation and Modeling' },
+        { code: 'ENCT 354', name: 'Minor Project' },
+        { code: 'ENCT 385-399', name: 'Elective II' }
+    ],
+    'Year IV - Part I': [
+        { code: 'ENEX 416', name: 'Digital Signal Analysis and Processing' },
+        { code: 'ENCT 411', name: 'Distributed and Cloud Computing' },
+        { code: 'ENCT 412', name: 'ICT Project Management' },
+        { code: 'ENEX 417', name: 'Energy, Environment and Social Engineering' },
+        { code: 'ENCT 435-444', name: 'Elective III' },
+        { code: 'ENCT 413', name: 'Project I' }
+    ],
+    'Year IV - Part II': [
+        { code: 'ENCT 463', name: 'Network and Cyber Security' },
+        { code: 'ENCT 465-474', name: 'Elective IV' },
+        { code: 'ENCT 462', name: 'Internship' },
+        { code: 'ENCT 461', name: 'Project II' }
+    ]
 };
+
+// Sample chapters for demonstration (Replace with actual chapter data)
+const sampleChapters = [
+    'Chapter 1', 'Chapter 2', 'Chapter 3', 'Chapter 4', 
+    'Chapter 5', 'Chapter 6', 'Chapter 7', 'Chapter 8'
+];
 
 // PDF URLs mapping - Replace with your actual PDF links
 const pdfUrls = {
-    'Engineering Mathematics I': 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-    'Computer Programming': 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-    // Add more PDF URLs for each subject here
-    // Example: 'Subject Name': 'https://your-pdf-url.com/file.pdf',
+    // Format: 'Subject Name - Chapter/Type': 'URL'
+    // Example: 'Engineering Mathematics I - Chapter 1': 'https://your-url.com/file.pdf'
 };
 
-// Store current semester selection
-let currentSemester = null;
+// Navigation state
+let navigationState = {
+    currentProgram: null,
+    currentLevel: null,
+    currentContent: null,
+    currentSubject: null
+};
 
 
 // ========== INITIALIZATION FUNCTION ==========
 
-// Function to create and display all semester cards
-function initializeSemesters() {
-    const grid = document.getElementById('semesterGrid');
-    
-    // Loop through all 8 semesters
-    for (let i = 1; i <= 8; i++) {
-        const card = document.createElement('div');
-        card.className = 'semester-card';
-        card.innerHTML = `
-            <h3>Semester ${i}</h3>
-            <p>${semestersData[i].length} Subjects</p>
-        `;
-        // Add click event to show subjects
-        card.onclick = () => showSubjects(i);
-        grid.appendChild(card);
-    }
+// Initialize the application
+function init() {
+    hideAllSections();
+    document.getElementById('programs').style.display = 'block';
 }
 
 
 // ========== NAVIGATION FUNCTIONS ==========
 
-// Function to display subjects for selected semester
-function showSubjects(semester) {
-    currentSemester = semester;
+// Show level options (Notes, Syllabus, Past Papers)
+function showLevels(program) {
+    navigationState.currentProgram = program;
+    hideAllSections();
     
-    // Hide semester grid
-    document.getElementById('semesters').style.display = 'none';
+    const levelsSection = document.getElementById('levelsSection');
+    const levelsGrid = document.getElementById('levelsGrid');
+    const levelTitle = document.getElementById('levelTitle');
     
-    // Show subjects section
-    document.getElementById('subjectsSection').classList.add('active');
-    document.getElementById('semesterTitle').textContent = `Semester ${semester} - Subjects`;
+    // Set title based on program
+    const titles = {
+        'grade11': 'Grade 11',
+        'grade12': 'Grade 12',
+        'bct': 'BCT Engineering'
+    };
+    levelTitle.textContent = titles[program];
     
-    // Populate subjects grid
-    const subjectsGrid = document.getElementById('subjectsGrid');
-    subjectsGrid.innerHTML = '';
+    // Create level cards
+    levelsGrid.innerHTML = '';
     
-    semestersData[semester].forEach(subject => {
-        const item = document.createElement('div');
-        item.className = 'subject-item';
-        item.textContent = subject;
-        item.onclick = () => showPDF(subject);
-        subjectsGrid.appendChild(item);
+    const levels = [
+        { id: 'notes', icon: '📝', title: 'Notes', desc: 'Chapter-wise study notes' },
+        { id: 'syllabus', icon: '📋', title: 'Syllabus', desc: 'Complete syllabus' },
+        { id: 'pastpapers', icon: '📄', title: 'Past Papers', desc: 'Previous year questions' }
+    ];
+    
+    levels.forEach(level => {
+        const card = document.createElement('div');
+        card.className = 'level-card';
+        card.innerHTML = `
+            <div style="font-size: 3rem; margin-bottom: 1rem;">${level.icon}</div>
+            <h3>${level.title}</h3>
+            <p>${level.desc}</p>
+        `;
+        card.onclick = () => showContent(level.id);
+        levelsGrid.appendChild(card);
     });
+    
+    levelsSection.classList.add('active');
 }
 
-// Function to display PDF viewer for selected subject
-function showPDF(subject) {
-    // Hide subjects section
+// Show content (Semesters/Years based on selection)
+function showContent(level) {
+    navigationState.currentLevel = level;
+    hideAllSections();
+    
+    const contentSection = document.getElementById('contentSection');
+    const contentGrid = document.getElementById('contentGrid');
+    const contentTitle = document.getElementById('contentTitle');
+    
+    const program = navigationState.currentProgram;
+    
+    // Set title
+    const titles = {
+        'grade11': 'Grade 11',
+        'grade12': 'Grade 12',
+        'bct': 'BCT Engineering'
+    };
+    const levelNames = {
+        'notes': 'Notes',
+        'syllabus': 'Syllabus',
+        'pastpapers': 'Past Papers'
+    };
+    contentTitle.textContent = `${titles[program]} - ${levelNames[level]}`;
+    
+    // Create content cards
+    contentGrid.innerHTML = '';
+    
+    if (program === 'bct') {
+        // BCT has 8 semesters (Year I-IV, Part I-II)
+        Object.keys(bctSemestersData).forEach(semester => {
+            const card = document.createElement('div');
+            card.className = 'content-card';
+            card.innerHTML = `
+                <h3>${semester}</h3>
+                <p>${bctSemestersData[semester].length} subjects</p>
+            `;
+            card.onclick = () => showSubjects(semester);
+            contentGrid.appendChild(card);
+        });
+    } else {
+        // Grade 11 and 12 - single year
+        const card = document.createElement('div');
+        card.className = 'content-card';
+        const yearName = program === 'grade11' ? 'Grade 11' : 'Grade 12';
+        const subjects = program === 'grade11' ? grade11Subjects : grade12Subjects;
+        card.innerHTML = `
+            <h3>${yearName}</h3>
+            <p>${subjects.length} subjects</p>
+        `;
+        card.onclick = () => showSubjects(yearName);
+        contentGrid.appendChild(card);
+    }
+    
+    contentSection.classList.add('active');
+}
+
+// Show subjects for selected content
+function showSubjects(content) {
+    navigationState.currentContent = content;
+    hideAllSections();
+    
+    const subjectsSection = document.getElementById('subjectsSection');
+    const subjectsGrid = document.getElementById('subjectsGrid');
+    const subjectsTitle = document.getElementById('subjectsTitle');
+    
+    subjectsTitle.textContent = `${content} - Select Subject`;
+    subjectsGrid.innerHTML = '';
+    
+    let subjects = [];
+    
+    // Get subjects based on program
+    if (navigationState.currentProgram === 'bct') {
+        subjects = bctSemestersData[content] || [];
+        subjects.forEach(subject => {
+            const item = document.createElement('div');
+            item.className = 'subject-item';
+            item.innerHTML = `<strong>${subject.code}</strong><br>${subject.name}`;
+            item.onclick = () => handleSubjectClick(subject.name);
+            subjectsGrid.appendChild(item);
+        });
+    } else if (navigationState.currentProgram === 'grade11') {
+        subjects = grade11Subjects;
+        subjects.forEach(subject => {
+            const item = document.createElement('div');
+            item.className = 'subject-item';
+            item.textContent = subject;
+            item.onclick = () => handleSubjectClick(subject);
+            subjectsGrid.appendChild(item);
+        });
+    } else if (navigationState.currentProgram === 'grade12') {
+        subjects = grade12Subjects;
+        subjects.forEach(subject => {
+            const item = document.createElement('div');
+            item.className = 'subject-item';
+            item.textContent = subject;
+            item.onclick = () => handleSubjectClick(subject);
+            subjectsGrid.appendChild(item);
+        });
+    }
+    
+    subjectsSection.classList.add('active');
+}
+
+// Handle subject click based on level type
+function handleSubjectClick(subject) {
+    navigationState.currentSubject = subject;
+    
+    // If it's notes, show chapters; otherwise show PDF directly
+    if (navigationState.currentLevel === 'notes') {
+        showChapters(subject);
+    } else {
+        // For syllabus and past papers, show PDF directly
+        showPDF(subject, navigationState.currentLevel);
+    }
+}
+
+// Show chapters for notes
+function showChapters(subject) {
+    hideAllSections();
+    
+    const chaptersSection = document.getElementById('chaptersSection');
+    const chaptersGrid = document.getElementById('chaptersGrid');
+    const chaptersTitle = document.getElementById('chaptersTitle');
+    
+    chaptersTitle.textContent = `${subject} - Select Chapter`;
+    chaptersGrid.innerHTML = '';
+    
+    // Create chapter items (using sample chapters)
+    sampleChapters.forEach(chapter => {
+        const item = document.createElement('div');
+        item.className = 'chapter-item';
+        item.textContent = chapter;
+        item.onclick = () => showPDF(subject, chapter);
+        chaptersGrid.appendChild(item);
+    });
+    
+    chaptersSection.classList.add('active');
+}
+
+// Show PDF viewer
+function showPDF(subject, type) {
+    hideAllSections();
+    
+    const pdfSection = document.getElementById('pdfViewerSection');
+    const pdfTitle = document.getElementById('pdfTitle');
+    const pdfViewer = document.getElementById('pdfViewer');
+    
+    pdfTitle.textContent = `${subject} - ${type}`;
+    
+    // Get PDF URL from mapping or use dummy
+    const pdfKey = `${subject} - ${type}`;
+    const pdfUrl = pdfUrls[pdfKey] || 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
+    
+    pdfViewer.src = pdfUrl;
+    pdfSection.classList.add('active');
+}
+
+
+// ========== HELPER FUNCTIONS ==========
+
+// Hide all sections
+function hideAllSections() {
+    document.getElementById('programs').style.display = 'none';
+    document.getElementById('levelsSection').classList.remove('active');
+    document.getElementById('contentSection').classList.remove('active');
     document.getElementById('subjectsSection').classList.remove('active');
-    
-    // Show PDF viewer section
-    document.getElementById('pdfViewerSection').classList.add('active');
-    document.getElementById('pdfTitle').textContent = subject;
-    
-    // Load PDF in iframe
-    const pdfUrl = pdfUrls[subject] || 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
-    document.getElementById('pdfViewer').src = pdfUrl;
+    document.getElementById('chaptersSection').classList.remove('active');
+    document.getElementById('pdfViewerSection').classList.remove('active');
 }
 
 
 // ========== BACK BUTTON HANDLERS ==========
 
-// Back to semesters button
-document.getElementById('backToSemesters').onclick = () => {
-    document.getElementById('subjectsSection').classList.remove('active');
-    document.getElementById('semesters').style.display = 'block';
+document.getElementById('backToPrograms').onclick = () => {
+    navigationState = { currentProgram: null, currentLevel: null, currentContent: null, currentSubject: null };
+    init();
 };
 
-// Back to subjects button
+document.getElementById('backToLevels').onclick = () => {
+    showLevels(navigationState.currentProgram);
+};
+
+document.getElementById('backToContent').onclick = () => {
+    showContent(navigationState.currentLevel);
+};
+
 document.getElementById('backToSubjects').onclick = () => {
-    document.getElementById('pdfViewerSection').classList.remove('active');
-    document.getElementById('subjectsSection').classList.add('active');
+    showSubjects(navigationState.currentContent);
+};
+
+document.getElementById('backFromPDF').onclick = () => {
+    // If viewing notes chapter, go back to chapters
+    if (navigationState.currentLevel === 'notes') {
+        showChapters(navigationState.currentSubject);
+    } else {
+        // Otherwise go back to subjects
+        showSubjects(navigationState.currentContent);
+    }
 };
 
 
 // ========== DARK MODE TOGGLE ==========
 
-// Dark mode toggle functionality
-document.getElementById('darkModeToggle').onclick = () => {
-    const html = document.documentElement;
-    const currentTheme = html.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    // Set new theme
-    html.setAttribute('data-theme', newTheme);
-    
-    // Update button text
-    const button = document.getElementById('darkModeToggle');
-    button.textContent = newTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
-};
-
-
-// ========== SEARCH FUNCTIONALITY ==========
-
-// Search bar functionality
-document.getElementById('searchBar').addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    const cards = document.querySelectorAll('.semester-card');
-    
-    // Filter semester cards based on search term
-    cards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        card.style.display = text.includes(searchTerm) ? 'block' : 'none';
-    });
-});
-
-
-// ========== APP INITIALIZATION ==========
-
-// Initialize the application when page loads
-initializeSemesters();
+document.getElementById('dark
