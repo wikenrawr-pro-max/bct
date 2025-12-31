@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Header with Sticky Navigation -->
     <header>
         <nav>
-            <div class="logo">📚 BCT Notes</div>
+            <div class="logo">
+                📚 BCT Notes
+            </div>
             <div class="search-container">
                 <input type="text" class="search-bar" id="searchBar" placeholder="Search subjects, semesters...">
                 <button class="dark-mode-toggle" id="darkModeToggle">🌙 Dark Mode</button>
@@ -17,6 +20,7 @@
         </nav>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
         <h1>BCT Engineering Notes</h1>
         <p>Your complete resource for Bachelor in Computer Engineering study materials</p>
@@ -25,18 +29,22 @@
         </button>
     </section>
 
+    <!-- Main Container -->
     <div class="container">
+        <!-- Semester Grid Section -->
         <section id="semesters">
             <h2 class="section-title">Select Your Semester</h2>
             <div class="semester-grid" id="semesterGrid"></div>
         </section>
 
+        <!-- Subjects Section (Hidden by default) -->
         <section class="subjects-section" id="subjectsSection">
             <button class="back-button" id="backToSemesters">← Back to Semesters</button>
             <h2 class="section-title" id="semesterTitle"></h2>
             <div class="subjects-grid" id="subjectsGrid"></div>
         </section>
 
+        <!-- PDF Viewer Section (Hidden by default) -->
         <section class="pdf-viewer-section" id="pdfViewerSection">
             <div class="pdf-header">
                 <h3 class="pdf-title" id="pdfTitle"></h3>
@@ -46,11 +54,13 @@
         </section>
     </div>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; 2024 BCT Engineering Notes. All rights reserved.</p>
         <p>Empowering BCT students with quality study materials</p>
     </footer>
 
+    <!-- Link to JavaScript file -->
     <script src="script.js"></script>
 </body>
 </html>
