@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCT Engineering Notes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">📚 BCT Notes</div>
+            <div class="search-container">
+                <input type="text" class="search-bar" id="searchBar" placeholder="Search subjects, semesters...">
+                <button class="dark-mode-toggle" id="darkModeToggle">🌙 Dark Mode</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>BCT Engineering Notes</h1>
+        <p>Your complete resource for Bachelor in Computer Engineering study materials</p>
+        <button class="cta-button" onclick="document.getElementById('semesters').scrollIntoView({behavior: 'smooth'})">
+            Explore Notes
+        </button>
+    </section>
+
+    <div class="container">
+        <section id="semesters">
+            <h2 class="section-title">Select Your Semester</h2>
+            <div class="semester-grid" id="semesterGrid"></div>
+        </section>
+
+        <section class="subjects-section" id="subjectsSection">
+            <button class="back-button" id="backToSemesters">← Back to Semesters</button>
+            <h2 class="section-title" id="semesterTitle"></h2>
+            <div class="subjects-grid" id="subjectsGrid"></div>
+        </section>
+
+        <section class="pdf-viewer-section" id="pdfViewerSection">
+            <div class="pdf-header">
+                <h3 class="pdf-title" id="pdfTitle"></h3>
+                <button class="back-button" id="backToSubjects">← Back to Subjects</button>
+            </div>
+            <iframe class="pdf-viewer" id="pdfViewer"></iframe>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 BCT Engineering Notes. All rights reserved.</p>
+        <p>Empowering BCT students with quality study materials</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
