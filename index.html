@@ -2,91 +2,319 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notebooks Nepal - Your Complete Study Resource</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Notebooks Nepal - Grade 11, 12 & BCT</title>
+
+    <style>
+        /* 1. Global Reset & Versatility Fixes */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden; /* Prevents horizontal scrolling on mobile */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* 2. Theme Variables */
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --bg-color: #ffffff;
+            --card-bg: #f3f4f6;
+            --text-color: #1f2937;
+            --border-color: #d1d5db;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #3b82f6;
+            --secondary-color: #60a5fa;
+            --bg-color: #111827;
+            --card-bg: #1f2937;
+            --text-color: #f9fafb;
+            --border-color: #374151;
+            --shadow: 0 4px 6px rgba(0,0,0,0.5);
+        }
+
+        /* 3. Header & Navigation */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo { font-size: 1.4rem; font-weight: bold; cursor: pointer; }
+
+        .nav-controls { display: flex; gap: 10px; align-items: center; flex-grow: 1; justify-content: flex-end; }
+
+        .search-bar {
+            padding: 0.5rem;
+            border-radius: 20px;
+            border: none;
+            width: 100%;
+            max-width: 200px;
+            outline: none;
+        }
+
+        .dark-mode-toggle {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem 0.8rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        /* 4. Hero & Main Layout */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* 5. Responsive Grids (The Versatility Secret) */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+
+        /* 6. Navigation Controls */
+        .section { display: none; animation: fadeIn 0.4s; }
+        .section.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .back-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        /* 7. PDF Viewer Fix for Android */
+        .pdf-container { width: 100%; height: 75vh; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); }
+        iframe { width: 100%; height: 100%; border: none; }
+
+        /* Mobile specific fixes */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.8rem; }
+            .grid { grid-template-columns: 1fr; } /* Stack cards on tiny screens */
+            .nav-controls { width: 100%; justify-content: space-between; }
+        }
+    </style>
 </head>
 <body>
+
     <header>
         <nav>
-            <div class="logo" onclick="location.reload()" style="cursor:pointer">
-                📚 Notebooks Nepal
-            </div>
-            <div class="search-container">
-                <input type="text" class="search-bar" id="searchBar" placeholder="Search subjects...">
-                <button class="dark-mode-toggle" id="darkModeToggle">🌙 Dark Mode</button>
+            <div class="logo" onclick="location.reload()">📚 Notebooks Nepal</div>
+            <div class="nav-controls">
+                <input type="text" class="search-bar" placeholder="Search...">
+                <button class="dark-mode-toggle" id="themeBtn">🌙 Dark</button>
             </div>
         </nav>
     </header>
 
-    <section class="hero" id="hero">
-        <h1>Notebooks Nepal</h1>
-        <p>Your Complete Study Resource for Grade 11, 12 & BCT Engineering</p>
-        <button class="cta-button" onclick="document.getElementById('programs').scrollIntoView({behavior: 'smooth'})">
-            Start Learning
-        </button>
+    <section class="hero" id="heroArea">
+        <h1>Welcome to Notebooks Nepal</h1>
+        <p>Complete Resources for Grade 11, 12 & BCT Engineering</p>
     </section>
 
     <div class="container">
-        <section id="programs">
-            <h2 class="section-title">Choose Your Program</h2>
-            <div class="program-grid">
-                <div class="program-card" onclick="showLevels('grade11')">
-                    <div class="program-icon">🎓</div>
-                    <h3>Grade 11</h3>
-                    <p>Notes, Syllabus & Past Papers</p>
-                </div>
-                <div class="program-card" onclick="showLevels('grade12')">
-                    <div class="program-icon">📖</div>
-                    <h3>Grade 12</h3>
-                    <p>Notes, Syllabus & Past Papers</p>
-                </div>
-                <div class="program-card" onclick="showLevels('bct')">
-                    <div class="program-icon">🎯</div>
-                    <h3>BCT Engineering</h3>
-                    <p>4 Years, 8 Semesters</p>
-                </div>
+        <div id="programs" class="section active">
+            <h2 style="margin-bottom:1rem; text-align:center;">Select Your Program</h2>
+            <div class="grid">
+                <div class="card" onclick="showLevels('grade11')"><h1>🎓</h1><h3>Grade 11</h3></div>
+                <div class="card" onclick="showLevels('grade12')"><h1>📖</h1><h3>Grade 12</h3></div>
+                <div class="card" onclick="showLevels('bct')"><h1>🎯</h1><h3>BCT Engineering</h3></div>
             </div>
-        </section>
+        </div>
 
-        <section class="levels-section" id="levelsSection">
-            <button class="back-button" id="backToPrograms">← Back to Programs</button>
-            <h2 class="section-title" id="levelTitle"></h2>
-            <div class="levels-grid" id="levelsGrid"></div>
-        </section>
+        <div id="levels" class="section">
+            <button class="back-btn" onclick="goBack('programs')">← Back</button>
+            <h2 id="levelHeader"></h2>
+            <div class="grid" id="levelsGrid"></div>
+        </div>
 
-        <section class="content-section" id="contentSection">
-            <button class="back-button" id="backToLevels">← Back</button>
-            <h2 class="section-title" id="contentTitle"></h2>
-            <div class="content-grid" id="contentGrid"></div>
-        </section>
+        <div id="content" class="section">
+            <button class="back-btn" onclick="goBack('levels')">← Back</button>
+            <h2 id="contentHeader"></h2>
+            <div class="grid" id="contentGrid"></div>
+        </div>
 
-        <section class="subjects-section" id="subjectsSection">
-            <button class="back-button" id="backToContent">← Back</button>
-            <h2 class="section-title" id="subjectsTitle"></h2>
-            <div class="subjects-grid" id="subjectsGrid"></div>
-        </section>
+        <div id="subjects" class="section">
+            <button class="back-btn" onclick="goBack('content')">← Back</button>
+            <h2 id="subjectHeader"></h2>
+            <div class="grid" id="subjectGrid"></div>
+        </div>
 
-        <section class="chapters-section" id="chaptersSection">
-            <button class="back-button" id="backToSubjects">← Back to Subjects</button>
-            <h2 class="section-title" id="chaptersTitle"></h2>
-            <div class="chapters-grid" id="chaptersGrid"></div>
-        </section>
-
-        <section class="pdf-viewer-section" id="pdfViewerSection">
-            <div class="pdf-header">
-                <h3 class="pdf-title" id="pdfTitle"></h3>
-                <button class="back-button" id="backFromPDF">← Close PDF</button>
+        <div id="viewer" class="section">
+            <button class="back-btn" onclick="goBack('subjects')">← Close PDF</button>
+            <h2 id="pdfHeader" style="margin-bottom:10px;"></h2>
+            <div class="pdf-container">
+                <iframe id="pdfFrame" src=""></iframe>
             </div>
-            <iframe class="pdf-viewer" id="pdfViewer"></iframe>
-        </section>
+        </div>
     </div>
 
-    <footer>
-        <p>&copy; 2025 Notebooks Nepal. All rights reserved.</p>
-        <p>Empowering Nepali students with quality study materials</p>
-    </footer>
+    <script>
+        // 1. Data Structure for BCT 8 Semesters
+        const bctData = {
+            'Year I - Part I': ['Engineering Mathematics I', 'Computer Programming', 'Engineering Drawing', 'Fundamentals of Electrical & Electronics', 'Engineering Physics', 'Engineering Workshop'],
+            'Year I - Part II': ['Engineering Mathematics II', 'Object Oriented Programming', 'Digital Logic', 'Electronic Devices & Circuits', 'Engineering Chemistry', 'Electrical Circuits & Machines'],
+            'Year II - Part I': ['Engineering Mathematics III', 'Communication English', 'Computer Graphics', 'Foundation of Data Science', 'Theory of Computation', 'Microprocessors'],
+            'Year II - Part II': ['Numerical Methods', 'Instrumentation', 'Electromagnetics', 'Data Structure & Algorithm', 'Data Communication', 'Operating System'],
+            'Year III - Part I': ['Probability & Statistics', 'Database Management System', 'Web Application Programming', 'Computer Organization & Architecture', 'Computer Networks', 'Elective I'],
+            'Year III - Part II': ['Engineering Economics', 'Artificial Intelligence', 'Software Engineering', 'Simulation & Modeling', 'Minor Project', 'Elective II'],
+            'Year IV - Part I': ['Digital Signal Processing', 'Distributed & Cloud Computing', 'ICT Project Management', 'Energy, Environment & Social Engineering', 'Elective III', 'Project I'],
+            'Year IV - Part II': ['Network & Cyber Security', 'Elective IV', 'Internship', 'Project II']
+        };
 
-    <script src="script.js"></script>
+        const g11Data = ['Physics', 'Chemistry', 'Mathematics', 'English', 'Nepali', 'Computer Science'];
+        const g12Data = ['Physics', 'Chemistry', 'Mathematics', 'English', 'Nepali', 'Computer Science'];
+
+        let state = { program: '', level: '', content: '' };
+
+        // 2. Navigation Logic
+        function hideAll() {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('heroArea').style.display = 'none';
+        }
+
+        function showLevels(prog) {
+            state.program = prog;
+            hideAll();
+            const grid = document.getElementById('levelsGrid');
+            grid.innerHTML = '';
+            document.getElementById('levelHeader').innerText = prog.toUpperCase();
+            
+            const options = [
+                {t: 'Notes', i: '📝'}, 
+                {t: 'Syllabus', i: '📋'}, 
+                {t: 'Past Papers', i: '📄'}
+            ];
+
+            options.forEach(opt => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<h1>${opt.i}</h1><h3>${opt.t}</h3>`;
+                card.onclick = () => showContent(opt.t);
+                grid.appendChild(card);
+            });
+            document.getElementById('levels').classList.add('active');
+        }
+
+        function showContent(lvl) {
+            state.level = lvl;
+            hideAll();
+            const grid = document.getElementById('contentGrid');
+            grid.innerHTML = '';
+            document.getElementById('contentHeader').innerText = `${state.program.toUpperCase()} - ${lvl}`;
+
+            if(state.program === 'bct') {
+                Object.keys(bctData).forEach(sem => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `<h3>${sem}</h3>`;
+                    card.onclick = () => showSubjects(sem);
+                    grid.appendChild(card);
+                });
+            } else {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<h3>Full Curriculum</h3>`;
+                card.onclick = () => showSubjects('Full');
+                grid.appendChild(card);
+            }
+            document.getElementById('content').classList.add('active');
+        }
+
+        function showSubjects(cont) {
+            state.content = cont;
+            hideAll();
+            const grid = document.getElementById('subjectGrid');
+            grid.innerHTML = '';
+            document.getElementById('subjectHeader').innerText = cont;
+
+            let list = state.program === 'bct' ? bctData[cont] : (state.program === 'grade11' ? g11Data : g12Data);
+
+            list.forEach(sub => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.padding = '1rem';
+                card.innerHTML = `<h4>${sub}</h4>`;
+                card.onclick = () => openPDF(sub);
+                grid.appendChild(card);
+            });
+            document.getElementById('subjects').classList.add('active');
+        }
+
+        function openPDF(sub) {
+            hideAll();
+            document.getElementById('pdfHeader').innerText = sub;
+            // DUMMY PDF - Replace with your real Google Drive / GitHub Links
+            document.getElementById('pdfFrame').src = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
+            document.getElementById('viewer').classList.add('active');
+        }
+
+        function goBack(targetId) {
+            hideAll();
+            if(targetId === 'programs') document.getElementById('heroArea').style.display = 'block';
+            document.getElementById(targetId).classList.add('active');
+        }
+
+        // 3. Theme Toggle
+        document.getElementById('themeBtn').onclick = () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            document.getElementById('themeBtn').innerText = isDark ? '🌙 Dark' : '☀️ Light';
+        };
+    </script>
 </body>
 </html>
